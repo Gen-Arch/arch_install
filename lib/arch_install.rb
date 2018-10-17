@@ -6,7 +6,6 @@ require "logger"
 require "arch_install/ssh"
 
 module ArchInstall
-  VERSION = "0.1.0"
 
   attr_accessor :logger
 

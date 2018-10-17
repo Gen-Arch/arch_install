@@ -1,14 +1,17 @@
-require "net-ssh"
+require "net/ssh"
 
 module ArchInstall
   class SSH
-    def initilize(host, user, **opt)
+    def initialize(host, user, **opt)
       @session = Net::SSH.start(host, user, **opt)
       @ch
     end
 
-    def channel
-      yield @session.open_channel
+    def channel(&block)
+      @session.open_channel do |ch|
+        yield ch
+        instance_eval(&block)
+      end
     end
 
   end
